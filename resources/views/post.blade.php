@@ -20,7 +20,7 @@
 
 
                 <div class="card-footer text-muted">
-                    Posted on May 13, 2023 by John Doe
+                    {{$post->user->name}}
                 </div>
                 <ul class="list-group list-group-flush">
                     @foreach ($post->comments as $comment)
