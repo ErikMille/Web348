@@ -7,7 +7,7 @@
             
             <div class="card m-3">
                 <div class="card-body">
-                    <form method="POST" action="{{route('comment.store')}}">
+                    <form method="POST" action="{{route('post.store')}}">
                         @csrf
                         <div class="form-group">
                             <label for="title">Post Title:</label>
@@ -19,6 +19,17 @@
                         </div>
                         <button type="submit" class="btn m-2 btn-primary">Submit</button>
                     </form>
+
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+
                 </div>
             </div>
 

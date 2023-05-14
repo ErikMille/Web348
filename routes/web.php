@@ -23,5 +23,9 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/recent_posts', [App\Http\Controllers\PostController::class, 'index'])->name('recent_posts');
 Route::get('/post/{id}', [App\Http\Controllers\PostController::class, 'show'])->name('post');
 
+Route::get('/post/create', [PostController::class, 'create'])->name('post.store')->middleware(['auth']);
+Route::get('/comment/create', [CommentController::class, 'create'])->name('comment.store')->middleware(['auth']);
+
 Route::post('/comment/store', [App\Http\Controllers\CommentController::class, 'store'])->name('comment.store')->middleware(['auth']);
-Route::post('/post/store', [App\Http\Controllers\PostController::class, 'store'])->name('comment.store')->middleware(['auth']);
+Route::post('/post/store', [App\Http\Controllers\PostController::class, 'store'])->name('post.store')->middleware(['auth']);
+Route::delete('/post/destroy/{id}', [App\Http\Controllers\PostController::class, 'destroy'])->name('post.destroy')->middleware(['auth']);

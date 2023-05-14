@@ -6,6 +6,8 @@ use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
+
 
 
 class PostController extends Controller
@@ -27,7 +29,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view('create/create_post');
     }
 
     /**
@@ -38,14 +40,16 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
+        
+        $request->validate([
             'title' => 'required',
             'text' => 'required'
         ]);
+        
 
         $post = new Post;
-        $post->text = $validatedData['text'];
-        $post->title = $validatedData['title'];
+        $post->text = $request['text'];
+        $post->title = $request['title'];
         $post->user_id = Auth::user()->id;
         $post->save();
 
@@ -92,8 +96,10 @@ class PostController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Post $post)
-    {
-        //
+    public function destroy($id)
+    {   
+        $post = Post::findOrFail($id);
+        $post->delete();
+        return redirect('/home');
     }
 }
