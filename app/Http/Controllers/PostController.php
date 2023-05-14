@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Auth;
+
 
 class PostController extends Controller
 {
@@ -14,7 +17,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        
+        return view('recent_posts', ['posts' => Post::all()]);
     }
 
     /**
@@ -35,7 +38,18 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'title' => 'required',
+            'text' => 'required'
+        ]);
+
+        $post = new Post;
+        $post->text = $validatedData['text'];
+        $post->title = $validatedData['title'];
+        $post->user_id = Auth::user()->id;
+        $post->save();
+
+        return Redirect::back();
     }
 
     /**

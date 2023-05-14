@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Comment;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Auth;
 
 class CommentController extends Controller
 {
@@ -35,7 +37,18 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'post_id' => 'required',
+            'text' => 'required'
+        ]);
+
+        $comment = new Comment;
+        $comment->text = $validatedData['text'];
+        $comment->post_id = $validatedData['post_id'];
+        $comment->user_id = Auth::user()->id;
+        $comment->save();
+
+        return Redirect::back();
     }
 
     /**

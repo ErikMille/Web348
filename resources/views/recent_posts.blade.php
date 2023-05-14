@@ -4,24 +4,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            
-            <div class="card m-3">
-                <div class="card-body">
-                    <form method="POST" action="{{route('comment.store')}}">
-                        @csrf
-                        <div class="form-group">
-                            <label for="title">Post Title:</label>
-                            <input type="text" class="form-control" id="title" name="title" placeholder="Enter post title">
-                        </div>
-                        <div class="form-group">
-                            <label for="text">Post Text:</label>
-                            <textarea class="form-control" id="text" name="text" rows="5" placeholder="Enter post text"></textarea>
-                        </div>
-                        <button type="submit" class="btn m-2 btn-primary">Submit</button>
-                    </form>
-                </div>
-            </div>
-
+        
             @foreach ($posts as $post)
             <div class="card m-3">
                 <div class="card-body">
