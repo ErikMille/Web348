@@ -20,7 +20,7 @@
 
 
                 <div class="card-footer text-muted">
-                    {{$post->user->name}}
+                    <a href="{{ route('user',['id'=>$post->user->id]) }}">{{$post->user->name}}</a>
                 </div>
                 <ul class="list-group list-group-flush">
                     @foreach ($post->comments as $comment)

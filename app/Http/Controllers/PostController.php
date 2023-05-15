@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 
 
 
@@ -19,7 +20,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        return view('recent_posts', ['posts' => Post::all()]);
+        return view('recent_posts', ['posts' => Post::orderBy('id')->paginate(5)]);
     }
 
     /**

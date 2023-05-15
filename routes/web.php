@@ -19,9 +19,10 @@ Route::get('/example', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/recent_posts', [App\Http\Controllers\PostController::class, 'index'])->name('recent_posts');
-Route::get('/post/{id}', [App\Http\Controllers\PostController::class, 'show'])->name('post');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware(['auth']);
+Route::get('/user/{id}', [App\Http\Controllers\HomeController::class, 'show'])->name('user')->middleware(['auth']);
+Route::get('/recent_posts', [App\Http\Controllers\PostController::class, 'index'])->name('recent_posts')->middleware(['auth']);
+Route::get('/post/{id}', [App\Http\Controllers\PostController::class, 'show'])->name('post')->middleware(['auth']);
 
 Route::get('/post/create', [PostController::class, 'create'])->name('post.store')->middleware(['auth']);
 Route::get('/comment/create', [CommentController::class, 'create'])->name('comment.store')->middleware(['auth']);

@@ -13,7 +13,7 @@
                     <a href="/post/{{$post->id}}" class="btn btn-primary">Read More</a>
                 </div>
                 <div class="card-footer text-muted">
-                    {{$post->user->name}}
+                    <a href="{{ route('user',['id'=>$post->user->id]) }}">{{$post->user->name}}</a>
                 </div>
                 <ul class="list-group list-group-flush">
                     @foreach ($post->comments as $comment)
@@ -28,9 +28,14 @@
                 </ul>
             </div>
             @endforeach
-
-
+            <div class="row">
+                <div class="d-flex justify-content-center">
+                    {{ $posts->links('pagination::bootstrap-4') }}
+                </div>
+            </div>
         </div>
     </div>
 </div>
+
+
 @endsection
